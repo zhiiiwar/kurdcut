@@ -1,0 +1,11 @@
+# Node
+node_modules/
+.env
+
+# MacOS
+.DS_Store
+
+# React build
+dashboard/build/
+dashboard/node_modules/
+dashboard/.env
