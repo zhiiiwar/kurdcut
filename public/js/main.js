@@ -49,19 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        2. Scroll-Triggered Animations (Intersection Observer)
        ========================================= */
-    const animatedElements = document.querySelectorAll('.fade-up');
+    const animatedElements = document.querySelectorAll('.fade-up, .reveal-text:not(.hero-subtitle)');
 
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -100px 0px', // Trigger slightly before it comes fully into view
-        threshold: 0.1
+        rootMargin: '0px 0px -50px 0px', // Trigger precisely when element enters deeper into view
+        threshold: 0.15 // Wait until 15% of the element is visible
     };
 
     const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Optional: Stop observing once animated
+                // Optional: Stop observing once animated for performance
                 observer.unobserve(entry.target);
             }
         });
