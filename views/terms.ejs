@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- Bootstrap 5 Grid System ONLY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <style>
+        .legal-header {
+            padding: 20vh 0 10vh;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: var(--spacing-xxl);
+        }
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            padding-bottom: var(--spacing-xxl);
+        }
+        .legal-content h2 {
+            color: var(--color-text-primary);
+            font-size: 2rem;
+            margin: var(--spacing-xl) 0 var(--spacing-md);
+            font-family: var(--font-serif);
+        }
+        .legal-content p {
+            margin-bottom: var(--spacing-md);
+        }
+        .legal-content ul {
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-lg);
+        }
+        .legal-content li {
+            margin-bottom: var(--spacing-xs);
+        }
+    </style>
+</head>
+<body class="theme-dark">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="navbar scrolled">
+        <div class="navbar-container">
+            <a href="/" class="brand-logo">KURD CUT</a>
+            <div class="nav-actions">
+                <a href="/" class="btn-secondary">Return Home</a>
+            </div>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="legal-header text-center fade-up">
+            <h1 class="hero-title" style="font-size: clamp(2rem, 5vw, 4rem);">Terms of Service</h1>
+            <p class="section-subtitle">Last Updated: March 2026</p>
+        </div>
+
+        <div class="legal-content fade-up delay-1">
+            <p>Welcome to Kurd Cut. By accessing or using our premium booking platform, mobile application, or website (collectively, the "Services"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our Services.</p>
+
+            <h2>1. User Accounts & Customer Usage</h2>
+            <p>The Kurd Cut app is completely free for Customers. As a Customer, you agree to:</p>
+            <ul>
+                <li>Provide accurate information during account registration.</li>
+                <li>Show up for appointments requested through the application, or cancel them with sufficient notice directly in the app.</li>
+                <li>Respect the professionals and business shops you book with.</li>
+            </ul>
+
+            <h2>2. Business Shop Obligations</h2>
+            <p>Business Shops operate on a premium monthly subscription basis. By operating a business account, you agree to:</p>
+            <ul>
+                <li>Only offer legitimate grooming, hair, nail, and beauty services.</li>
+                <li>Maintain a high standard of professional service befitting the Kurd Cut ecosystem.</li>
+                <li>Promptly accept or reject incoming booking requests to ensure excellent customer experience.</li>
+                <li>Pay the monthly or annual subscription fees as agreed upon during your manual onboarding process with the Kurd Cut admin team.</li>
+            </ul>
+
+            <h2>3. Service Reliability</h2>
+            <p>While we strive to provide a world-class, uninterrupted platform, Kurd Cut does not guarantee that the Services will function without disruption, delay, or errors. We reserve the right to modify or discontinue features of the platform at any time.</p>
+
+            <h2>4. Disputes & Liability</h2>
+            <p>Kurd Cut acts solely as a booking and discovery facilitator between Customers and Business Shops. We are not liable for the quality of services provided by the shops, nor any disputes arising between Customers and Business owners regarding payments rendered at the shop.</p>
+            
+            <h2>5. Contact Information</h2>
+            <p>For inquiries regarding these Terms of Service, contact us at: <a href="mailto:legal@kurdcut.com" class="btn-link">legal@kurdcut.com</a>.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>KURD CUT</h2>
+                <p>The premium booking standard.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Platform</h4>
+                    <a href="/#discover">Discover</a>
+                    <a href="/business-subscription">For Business</a>
+                </div>
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kurd Cut. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

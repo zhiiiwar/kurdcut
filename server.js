@@ -30,6 +30,18 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/privacy', (req, res) => {
+    res.render('privacy', { title: 'Privacy Policy | Kurd Cut' });
+});
+
+app.get('/terms', (req, res) => {
+    res.render('terms', { title: 'Terms of Service | Kurd Cut' });
+});
+
+app.get('/business-subscription', (req, res) => {
+    res.render('subscription', { title: 'Business Subscriptions | Kurd Cut' });
+});
+
 // API Routes (Placeholder for Dashboard)
 app.use('/api/v1/health', (req, res) => {
     res.status(200).json({ status: 'success', message: 'Kurd Cut API is running.' });
