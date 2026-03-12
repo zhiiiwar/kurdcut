@@ -63,7 +63,7 @@ const Hero = () => {
           </div>
         </div>
         <div className="flex items-center justify-center lg:justify-end">
-          <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] transform hover:scale-105 hover:-translate-y-4 transition-all duration-700 ease-out flex justify-center items-center">
+          <div className="relative w-full max-w-[300px] sm:max-w-[340px] lg:max-w-[380px] xl:max-w-[420px] transform hover:scale-105 hover:-translate-y-4 transition-all duration-700 ease-out flex justify-center items-center">
             <img 
               src="/assets/images/mockup1.png" 
               alt="KurdCut App Experience" 
