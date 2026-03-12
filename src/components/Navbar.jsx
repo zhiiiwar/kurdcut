@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const LANGS = [
   { code: 'en', label: 'EN' },
@@ -23,14 +24,14 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-dark-950/80 backdrop-blur-xl border-b border-dark-600/50">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link to="/" className="text-xl font-bold tracking-widest">
+        <a href="/" className="text-xl font-bold tracking-widest">
           KURD<span className="text-gold-500">CUT</span>
-        </Link>
+        </a>
 
         <nav className="hidden md:flex items-center gap-8">
-          <a href="#customers" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_customers')}</a>
-          <a href="#partners" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_partners')}</a>
-          <a href="#pricing" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_pricing')}</a>
+          <a href="/#customers" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_customers')}</a>
+          <a href="/#partners" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_partners')}</a>
+          <a href="/#pricing" className="text-sm text-dark-300 hover:text-white transition-colors">{t('nav_pricing')}</a>
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
@@ -47,10 +48,10 @@ const Navbar = () => {
             ))}
           </div>
 
-          <a href={WA} target="_blank" rel="noopener" className="text-sm text-dark-400 hover:text-white transition-colors">
+          <Link to="/contact" className="text-sm text-dark-400 hover:text-white transition-colors">
             {t('nav_partner_login')}
-          </a>
-          <a href="#download" className="accent-gradient text-dark-950 font-semibold text-sm px-5 py-2.5 rounded-full hover:shadow-lg hover:shadow-gold-500/20 transition-all">
+          </Link>
+          <a href="/#download" className="accent-gradient text-dark-950 font-semibold text-sm px-5 py-2.5 rounded-full hover:shadow-lg hover:shadow-gold-500/20 transition-all">
             {t('nav_download')}
           </a>
         </div>
@@ -62,9 +63,9 @@ const Navbar = () => {
 
       {open && (
         <div className="md:hidden bg-dark-900 border-t border-dark-600/50 px-6 py-6 flex flex-col gap-4">
-          <a href="#customers" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_customers')}</a>
-          <a href="#partners" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_partners')}</a>
-          <a href="#pricing" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_pricing')}</a>
+          <a href="/#customers" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_customers')}</a>
+          <a href="/#partners" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_partners')}</a>
+          <a href="/#pricing" onClick={() => setOpen(false)} className="text-dark-300 hover:text-white py-2">{t('nav_pricing')}</a>
           <hr className="border-dark-600" />
           {/* Language Switcher (mobile) */}
           <div className="flex gap-2">
@@ -78,8 +79,10 @@ const Navbar = () => {
               </button>
             ))}
           </div>
-          <a href={WA} target="_blank" rel="noopener" className="text-dark-400 text-sm py-2">{t('nav_partner_login')}</a>
-          <a href="#download" className="accent-gradient text-dark-950 font-semibold text-center px-5 py-2.5 rounded-full">
+          <Link to="/contact" className="text-dark-400 text-sm py-2" onClick={() => setOpen(false)}>
+            {t('nav_partner_login')}
+          </Link>
+          <a href="/#download" className="accent-gradient text-dark-950 font-semibold text-center px-5 py-2.5 rounded-full">
             {t('nav_download')}
           </a>
         </div>

@@ -3,10 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import Subscription from './pages/Subscription'
+import DataDeletion from './pages/DataDeletion'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 function App() {
   const { i18n } = useTranslation()
@@ -19,6 +23,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <main>
         <Routes>
@@ -26,6 +31,9 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/business-subscription" element={<Subscription />} />
+          <Route path="/data-deletion" element={<DataDeletion />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

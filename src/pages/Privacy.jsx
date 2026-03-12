@@ -1,74 +1,66 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Privacy = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const ref = useScrollReveal();
+  console.log("Privacy component rendered");
 
-    useEffect(() => {
-        // Scroll to top on mount
-        window.scrollTo(0, 0);
-
-        // Setup fade-up animation observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        setTimeout(() => {
-            document.querySelectorAll('.fade-up').forEach(el => {
-                observer.observe(el);
-            });
-        }, 100);
-
-        return () => observer.disconnect();
-    }, []);
-
-    return (
-        <div className="container">
-            <div className="legal-header text-center fade-up">
-                <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
-                    {t('privacy_title')}
-                </h1>
-                <p className="section-subtitle">{t('privacy_eff')}</p>
-            </div>
-
-            <div className="legal-content fade-up delay-1">
-                <p>{t('privacy_p1')}</p>
-
-                <h2>1. Information We Collect</h2>
-                <p>We collect several types of information from and about users of our Platform, including:</p>
-                <ul>
-                    <li><strong>Personal Data:</strong> Name, email address, phone number, and location (for Customer booking accounts).</li>
-                    <li><strong>Business Data:</strong> Shop name, addresses, service menus, team members, and financial transaction metadata (for Business accounts).</li>
-                    <li><strong>Usage Details:</strong> IP addresses, browser information, and details of your visits to our Platform.</li>
-                </ul>
-
-                <h2>2. How We Use Your Information</h2>
-                <p>We use information that we collect about you or that you provide to us:</p>
-                <ul>
-                    <li>To present our Platform and its contents to you in the highest quality.</li>
-                    <li>To facilitate and manage bookings between Customers and Businesses.</li>
-                    <li>To process subscription payments for Business Shop accounts securely.</li>
-                    <li>To notify you about changes to our Platform or any products or services we offer.</li>
-                </ul>
-
-                <h2>3. Data Security</h2>
-                <p>We have implemented world-class measures designed to secure your personal information from accidental loss and from unauthorized access, use, alteration, and disclosure. All information you provide to us is stored on our secure servers behind deep-encryption firewalls.</p>
-
-                <h2>4. Contact Information</h2>
-                <p>To ask questions or comment about this privacy policy and our privacy practices, contact us at: <a href="mailto:privacy@kurdcut.com" className="btn-link">privacy@kurdcut.com</a>.</p>
-            </div>
+  return (
+    <section className="pt-28 pb-20">
+      <div className="max-w-3xl mx-auto px-6">
+        <div ref={ref} className="text-center mb-12 fade-up">
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 text-white">{t('privacy_title')}</h1>
+          <p className="text-dark-400 text-sm">{t('privacy_eff')}</p>
         </div>
-    );
+
+        <div className="space-y-8 text-dark-200 leading-relaxed fade-up delay-1 visible">
+          <p>{t('privacy_p1')}</p>
+
+          {/* Section 1 */}
+          <div>
+            <h2 className="text-xl font-bold text-white mb-3">{t('privacy_h1')}</h2>
+            <p className="mb-3">{t('privacy_h1_intro')}</p>
+            <ul className="list-disc list-inside space-y-2 ps-2 text-dark-300">
+              <li>{t('privacy_h1_li1')}</li>
+              <li>{t('privacy_h1_li2')}</li>
+              <li>{t('privacy_h1_li3')}</li>
+              <li>{t('privacy_h1_li4')}</li>
+            </ul>
+          </div>
+
+          {/* Section 2 */}
+          <div>
+            <h2 className="text-xl font-bold text-white mb-3">{t('privacy_h2')}</h2>
+            <p className="mb-3">{t('privacy_h2_intro')}</p>
+            <ul className="list-disc list-inside space-y-2 ps-2 text-dark-300">
+              <li>{t('privacy_h2_li1')}</li>
+              <li>{t('privacy_h2_li2')}</li>
+              <li>{t('privacy_h2_li3')}</li>
+            </ul>
+          </div>
+
+          {/* Section 3 */}
+          <div>
+            <h2 className="text-xl font-bold text-white mb-3">{t('privacy_h3')}</h2>
+            <p>{t('privacy_h3_p')}</p>
+          </div>
+
+          {/* Section 4 */}
+          <div>
+            <h2 className="text-xl font-bold text-white mb-3">{t('privacy_h4')}</h2>
+            <p>
+              {t('privacy_h4_p')}{' '}
+              <a href={`mailto:${t('privacy_h4_email')}`} className="text-gold-500 hover:text-gold-400 transition-colors underline underline-offset-4">
+                {t('privacy_h4_email')}
+              </a>
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Privacy;

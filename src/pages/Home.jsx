@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Clock, Star, Bell, CalendarCheck, Users, MessageSquare,
@@ -6,20 +6,42 @@ import {
   UserPlus, ListPlus, CreditCard, Rocket, Quote, Check,
   MessageCircle
 } from 'lucide-react';
+import { AppleIcon, GooglePlayIcon } from '../components/StoreIcons';
+import FeatureCards from '../components/FeatureCards';
 
-const WA = 'https://wa.me/9647501853167';
+import { Link } from 'react-router-dom';
+const useScrollReveal = () => {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+};
 
 /* ═══════════════════════════════════════════════════
    1. HERO
    ═══════════════════════════════════════════════════ */
 const Hero = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/5 rounded-full blur-[120px]" />
       </div>
-      <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div ref={ref} className="fade-up max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
         <div>
           <span className="inline-block text-gold-500 text-sm font-semibold tracking-widest uppercase mb-4 border border-gold-500/30 px-4 py-1.5 rounded-full">
             {t('hero_badge')}
@@ -35,35 +57,18 @@ const Hero = () => {
             <a href="#download" className="accent-gradient text-dark-950 font-bold px-8 py-3.5 rounded-full text-base hover:shadow-xl hover:shadow-gold-500/20 transition-all flex items-center gap-2">
               <Smartphone size={18} /> {t('hero_cta_app')}
             </a>
-            <a href={WA} target="_blank" rel="noopener" className="border border-dark-600 text-white font-semibold px-8 py-3.5 rounded-full text-base hover:border-gold-500 transition-all flex items-center gap-2">
+            <Link to="/contact" className="border border-dark-600 text-white font-semibold px-8 py-3.5 rounded-full text-base hover:border-gold-500 transition-all flex items-center gap-2">
               <Monitor size={18} /> {t('hero_cta_shop')}
-            </a>
+            </Link>
           </div>
         </div>
-        <div className="flex items-end justify-center gap-6 lg:gap-8">
-          <div className="mockup-phone p-4 flex flex-col gap-3">
-            <div className="h-3 w-12 bg-dark-600 rounded-full mx-auto" />
-            <div className="flex-1 bg-dark-700 rounded-2xl p-3 flex flex-col gap-2">
-              <div className="h-5 w-24 bg-dark-600 rounded" />
-              <div className="h-16 bg-dark-600/50 rounded-xl" />
-              <div className="h-16 bg-dark-600/50 rounded-xl" />
-              <div className="h-16 bg-dark-600/50 rounded-xl" />
-              <div className="mt-auto h-10 accent-gradient rounded-xl" />
-            </div>
-          </div>
-          <div className="mockup-dashboard p-3 flex-col gap-2 self-center hidden sm:flex">
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-            </div>
-            <div className="flex-1 bg-dark-700 rounded-lg p-3 grid grid-cols-7 gap-1">
-              {Array.from({ length: 35 }).map((_, i) => (
-                <div key={i} className={`h-4 rounded text-[6px] flex items-center justify-center ${[8,15,22].includes(i) ? 'bg-gold-500/30 text-gold-400' : 'bg-dark-600/40'}`}>
-                  {[8,15,22].includes(i) && '•'}
-                </div>
-              ))}
-            </div>
+        <div className="flex items-center justify-center lg:justify-end">
+          <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] transform hover:scale-105 hover:-translate-y-4 transition-all duration-700 ease-out flex justify-center items-center">
+            <img 
+              src="/assets/images/mockup1.png" 
+              alt="KurdCut App Experience" 
+              className="relative z-10 w-full h-auto drop-shadow-2xl"
+            />
           </div>
         </div>
       </div>
@@ -76,6 +81,7 @@ const Hero = () => {
    ═══════════════════════════════════════════════════ */
 const CustomerFeatures = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   const features = [
     { icon: Clock, key: 'cf_1' },
     { icon: Star, key: 'cf_2' },
@@ -83,7 +89,7 @@ const CustomerFeatures = () => {
   ];
   return (
     <section id="customers" className="py-24 border-t border-dark-600/30">
-      <div className="max-w-7xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('cf_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">{t('cf_title')}</h2>
@@ -117,14 +123,15 @@ const CustomerFeatures = () => {
    ═══════════════════════════════════════════════════ */
 const PartnerFeatures = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   const features = [
-    { icon: CalendarCheck, key: 'pf_1' },
-    { icon: Users, key: 'pf_2' },
-    { icon: MessageSquare, key: 'pf_3' },
+    { icon: CalendarCheck, key: 'pf_1', img: '/assets/images/calendar.png' },
+    { icon: Users, key: 'pf_2', img: '/assets/images/staff.png' },
+    { icon: MessageSquare, key: 'pf_3', img: '/assets/images/sms-notifications.png' },
   ];
   return (
     <section id="partners" className="py-24 bg-dark-900/50 border-t border-dark-600/30">
-      <div className="max-w-7xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('pf_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">{t('pf_title')}</h2>
@@ -139,13 +146,13 @@ const PartnerFeatures = () => {
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold mb-4">{t(`${f.key}_title`)}</h3>
                 <p className="text-dark-300 text-lg leading-relaxed mb-6">{t(`${f.key}_desc`)}</p>
-                <a href={WA} target="_blank" rel="noopener" className="text-gold-500 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
+                <Link to="/contact" className="text-gold-500 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
                   {t('pf_cta')} <ArrowRight size={16} />
-                </a>
+                </Link>
               </div>
               <div className={i % 2 !== 0 ? 'md:order-1' : ''}>
-                <div className="glass-card rounded-2xl p-8 aspect-video flex items-center justify-center">
-                  <f.icon size={80} className="text-dark-600" />
+                <div className="glass-card rounded-2xl overflow-hidden aspect-video">
+                  <img src={f.img} alt={t(`${f.key}_title`)} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
@@ -161,6 +168,7 @@ const PartnerFeatures = () => {
    ═══════════════════════════════════════════════════ */
 const Pricing = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   const [annual, setAnnual] = useState(false);
 
   const tiers = [
@@ -179,7 +187,7 @@ const Pricing = () => {
 
   return (
     <section id="pricing" className="py-24 border-t border-dark-600/30">
-      <div className="max-w-5xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('pr_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">{t('pr_title')}</h2>
@@ -217,9 +225,9 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <a href={WA} target="_blank" rel="noopener" className={`flex items-center justify-center gap-2 text-center font-semibold py-3 rounded-full transition-all ${tier.popular ? 'accent-gradient text-dark-950 hover:shadow-lg hover:shadow-gold-500/20' : 'border border-dark-600 text-white hover:border-gold-500'}`}>
+              <Link to="/contact" className={`flex items-center justify-center gap-2 text-center font-semibold py-3 rounded-full transition-all ${tier.popular ? 'accent-gradient text-dark-950 hover:shadow-lg hover:shadow-gold-500/20' : 'border border-dark-600 text-white hover:border-gold-500'}`}>
                 <MessageCircle size={18} /> {t('pr_contact_wa')}
-              </a>
+              </Link>
               <p className="text-dark-500 text-xs text-center mt-4">{t('pr_note')}</p>
             </div>
           ))}
@@ -234,6 +242,7 @@ const Pricing = () => {
    ═══════════════════════════════════════════════════ */
 const Timeline = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   const steps = [
     { icon: UserPlus, key: 'tl_1' },
     { icon: ListPlus, key: 'tl_2' },
@@ -242,7 +251,7 @@ const Timeline = () => {
   ];
   return (
     <section className="py-24 bg-dark-900/50 border-t border-dark-600/30">
-      <div className="max-w-5xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('tl_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">{t('tl_title')}</h2>
@@ -269,9 +278,10 @@ const Timeline = () => {
    ═══════════════════════════════════════════════════ */
 const Testimonials = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   return (
     <section className="py-24 border-t border-dark-600/30">
-      <div className="max-w-5xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('ts_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3">{t('ts_title')}</h2>
@@ -310,6 +320,7 @@ const Testimonials = () => {
    ═══════════════════════════════════════════════════ */
 const FAQ = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   const [tab, setTab] = useState('users');
   const [openIdx, setOpenIdx] = useState(null);
 
@@ -320,7 +331,7 @@ const FAQ = () => {
 
   return (
     <section className="py-24 bg-dark-900/50 border-t border-dark-600/30">
-      <div className="max-w-3xl mx-auto px-6">
+      <div ref={ref} className="fade-up max-w-3xl mx-auto px-6">
         <div className="text-center mb-12">
           <span className="text-gold-500 text-sm font-semibold uppercase tracking-widest">{t('faq_label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-8">{t('faq_title')}</h2>
@@ -358,24 +369,25 @@ const FAQ = () => {
    ═══════════════════════════════════════════════════ */
 const DownloadCTA = () => {
   const { t } = useTranslation();
+  const ref = useScrollReveal();
   return (
     <section id="download" className="py-24 border-t border-dark-600/30 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold-500/8 rounded-full blur-[100px]" />
       </div>
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div ref={ref} className="fade-up max-w-4xl mx-auto px-6 text-center relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">{t('dl_title')}</h2>
         <p className="text-dark-300 text-lg max-w-xl mx-auto mb-10">{t('dl_desc')}</p>
         <div className="flex flex-wrap gap-4 justify-center">
           <a href="#" className="border border-dark-600 rounded-xl px-6 py-3 flex items-center gap-3 hover:border-gold-500 transition-all bg-dark-800/50">
-            <span className="text-2xl">🍎</span>
+            <AppleIcon size={28} className="text-white" />
             <div className="text-start">
               <div className="text-dark-400 text-[10px] uppercase tracking-wider">{t('dl_apple')}</div>
               <div className="font-semibold">App Store</div>
             </div>
           </a>
           <a href="#" className="border border-dark-600 rounded-xl px-6 py-3 flex items-center gap-3 hover:border-gold-500 transition-all bg-dark-800/50">
-            <span className="text-2xl">▶️</span>
+            <GooglePlayIcon size={28} className="text-white" />
             <div className="text-start">
               <div className="text-dark-400 text-[10px] uppercase tracking-wider">{t('dl_google')}</div>
               <div className="font-semibold">Google Play</div>
@@ -390,17 +402,22 @@ const DownloadCTA = () => {
 /* ═══════════════════════════════════════════════════
    HOME
    ═══════════════════════════════════════════════════ */
-const Home = () => (
-  <div>
-    <Hero />
-    <CustomerFeatures />
-    <PartnerFeatures />
-    <Pricing />
-    <Timeline />
-    <Testimonials />
-    <FAQ />
-    <DownloadCTA />
-  </div>
-);
+const Home = () => {
+  const { i18n } = useTranslation();
+  
+  return (
+    <div>
+      <Hero />
+      <FeatureCards language={i18n.language || 'ku'} />
+      <CustomerFeatures />
+      <PartnerFeatures />
+      <Pricing />
+      <Timeline />
+      <Testimonials />
+      <FAQ />
+      <DownloadCTA />
+    </div>
+  );
+};
 
 export default Home;

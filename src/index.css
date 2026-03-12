@@ -3,8 +3,8 @@
 /* ── Rabar Kurdish Font ── */
 @font-face {
   font-family: 'Rabar';
-  src: url('/fonts/Rabar_021.woff2') format('woff2'),
-       url('/fonts/Rabar_021.woff') format('woff');
+  src: url('/fonts/Rabar_021.woff') format('woff'),
+       url('/fonts/Rabar_021.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -40,11 +40,46 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Hide default cursor when custom is active */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, [role="button"] { cursor: none; }
+}
+
 /* RTL + Kurdish/Arabic font */
 [dir="rtl"] body,
 [lang="ku"] body,
 [lang="ar"] body {
   font-family: var(--font-kurd);
+}
+
+/* ── Custom Cursor ── */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--color-gold-500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+.cursor-outline {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 2px solid var(--color-gold-500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+}
+
+/* Hide custom cursor on touch devices */
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-outline { display: none; }
 }
 
 /* ── Utilities ── */
@@ -58,6 +93,20 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-dark-600);
 }
+
+/* ── Scroll Reveal Animation ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up.delay-1 { transition-delay: 0.15s; }
+.fade-up.delay-2 { transition-delay: 0.3s; }
+.fade-up.delay-3 { transition-delay: 0.45s; }
 
 /* pricing toggle */
 .pricing-toggle input:checked + .toggle-slider {
